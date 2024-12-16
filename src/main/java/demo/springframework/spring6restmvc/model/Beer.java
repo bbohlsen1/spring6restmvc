@@ -10,7 +10,7 @@ import java.util.UUID;
 
 
 @Data //Combines - @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
-@Builder //Implements builder patter for object creation eg. Person.builder().name("Adam Savage").build()
+@Builder //Implements builder pattern for object creation eg. Person.builder().name("Adam Savage").build()
 public class Beer  {
     private UUID id;
     private Integer version;
