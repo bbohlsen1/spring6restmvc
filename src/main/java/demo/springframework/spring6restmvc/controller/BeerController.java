@@ -67,13 +67,21 @@ public class BeerController {
         return beerService.listBeers();
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity handleNotFoundException() {
+        System.out.println("In exception handler");
+
+        //alternative to the new method
+        return  ResponseEntity.notFound().build();
+    }
+
     //RequestMethod is used to specify HTTP method that a request mapping should respond to
     @GetMapping(value = BEER_PATH_ID)
     public Beer getBeerById(@PathVariable("beerId") UUID beerId) {
 
             log.debug("Get beer by id - in controller - 1234 asdf");
 
-        return beerService.getBeerById(beerId);
+        return beerService.getBeerById(beerId).orElseThrow(NotFoundException::new);
     }
 
 
