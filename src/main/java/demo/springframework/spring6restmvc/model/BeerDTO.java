@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Data //Combines - @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
 @Builder //Implements builder pattern for object creation eg. Person.builder().name("Adam Savage").build()
-public class Beer  {
+public class BeerDTO {
     private UUID id;
     private Integer version;
     private String beerName;

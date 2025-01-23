@@ -1,6 +1,6 @@
 package demo.springframework.spring6restmvc.controller;
 
-import demo.springframework.spring6restmvc.model.Customer;
+import demo.springframework.spring6restmvc.model.CustomerDTO;
 import demo.springframework.spring6restmvc.services.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class CustomerController {
 
     @PatchMapping("{customerId}")
     public ResponseEntity updateCustomerPatchById(@PathVariable("customerId") UUID customerId,
-                                                  @RequestBody Customer customer) {
+                                                  @RequestBody CustomerDTO customer) {
 
         customerService.patchCustomerId(customerId, customer);
 
@@ -38,7 +38,7 @@ public class CustomerController {
     }
 
     @PutMapping("{customerId}")
-    public ResponseEntity updateById(@PathVariable("customerId") UUID customerId, @RequestBody Customer customer) {
+    public ResponseEntity updateById(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDTO customer) {
 
         customerService.updateById(customerId, customer);
 
@@ -46,8 +46,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody Customer customer) {
-        Customer savedCustomer = customerService.saveNewCustomer(customer);
+    public ResponseEntity handlePost(@RequestBody CustomerDTO customer) {
+        CustomerDTO savedCustomer = customerService.saveNewCustomer(customer);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/customer/" + savedCustomer.getId().toString());
@@ -59,12 +59,12 @@ public class CustomerController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Customer> listCustomers() {
+    public List<CustomerDTO> listCustomers() {
         return customerService.listCustomers();
     }
 
     @RequestMapping(value = "{customerId}", method = RequestMethod.GET)
-    public Customer getCustomer(@PathVariable("customerId")UUID customerId) {
+    public CustomerDTO getCustomer(@PathVariable("customerId")UUID customerId) {
         log.debug("Get beer by id");
         return customerService.getCustomerById(customerId);
     }
