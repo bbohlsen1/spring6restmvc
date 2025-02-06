@@ -66,6 +66,6 @@ public class CustomerController {
     @RequestMapping(value = "{customerId}", method = RequestMethod.GET)
     public CustomerDTO getCustomer(@PathVariable("customerId")UUID customerId) {
         log.debug("Get beer by id");
-        return customerService.getCustomerById(customerId);
+        return customerService.getCustomerById(customerId).orElseThrow(NotFoundException::new);
     }
 }

@@ -53,10 +53,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getCustomerById(UUID id) {
+    public Optional<CustomerDTO> getCustomerById(UUID id) {
         log.debug("Get Beer ID - in service. ID: {}", id.toString());
 
-        return customerMap.get(id);
+        return Optional.of(customerMap.get(id));
     }
 
     @Override

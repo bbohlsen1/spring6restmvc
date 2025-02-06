@@ -94,7 +94,7 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public void getBeerById(UUID beerId, BeerDTO beer) {
+    public Optional<BeerDTO> getBeerById(UUID beerId, BeerDTO beer) {
         BeerDTO existing = beerMap.get(beerId);
         existing.setBeerName(beer.getBeerName());
         existing.setBeerStyle(beer.getBeerStyle());
@@ -104,11 +104,14 @@ public class BeerServiceImpl implements BeerService {
 
         beerMap.put(existing.getId(), existing);
 
+        return Optional.of(existing);
     }
 
     @Override
-    public void deleteById(UUID beerId) {
+    public Boolean deleteById(UUID beerId) {
         beerMap.remove(beerId);
+
+        return true;
     }
 
     //For patches there isn't a great way for getting around checking each and every property to see if it
